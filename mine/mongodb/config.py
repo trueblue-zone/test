@@ -1,0 +1,6 @@
+# mongodb_uri = 'mongodb://172.26.35.133:27041,172.26.35.133:27042,172.26.35.133:27043'
+replicaSet = 'cs'
+user_name = 'test'
+user_pwd = 'test'
+database_name = 'static_web_test'
+mongodb_uri = 'mongodb://172.26.35.136:27041,172.26.35.154:27042,172.26.35.242:27043'

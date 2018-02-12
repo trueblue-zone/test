@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+  db_nextcloud:
+    image: '172.26.35.211:4000/mariadb'
+    container_name: db_nextcloud
+    ports:
+      - "8089:3306"
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+
+
+services:
+  nextcloud:
+    image: '172.26.35.211:4000/wonderfall/nextcloud'
+    container_name: nextcloud
+    ports:
+      - "8087:8888"
+    volumes:
+      - ./data/data:/data
+      - ./data/config:/config
+      - ./data/apps:/apps2
+      - ./data/themes:/nextcloud/themes
+    environment:
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=nextcloudindocker
+      - DOMAIN=172.26.35.47:8087
+      - DB_TYPE=mysql
+      - DB_NAME=nextcloud
+      - DB_USER=nextcloud
+      - DB_PASSWORD=nextcloud
+      - DB_HOST=db_nextcloud
+
+
+# docker run -d --name db_nextcloud \
+#        -v /mnt/nextcloud/db:/var/lib/mysql \
+#        -e MYSQL_ROOT_PASSWORD=supersecretpassword \
+#        -e MYSQL_DATABASE=nextcloud -e MYSQL_USER=nextcloud \
+#        -e MYSQL_PASSWORD=supersecretpassword \
+#        mariadb:10
+#
+# docker run -d --name nextcloud \
+#        --link db_nextcloud:db_nextcloud \
+#        -v /mnt/nextcloud/data:/data \
+#        -v /mnt/nextcloud/config:/config \
+#        -v /mnt/nextcloud/apps:/apps2 \
+#        -v /mnt/nextcloud/themes:/nextcloud/themes \
+#        -e UID=1000 -e GID=1000 \
+#        -e UPLOAD_MAX_SIZE=10G \
+#        -e APC_SHM_SIZE=128M \
+#        -e OPCACHE_MEM_SIZE=128 \
+#        -e CRON_PERIOD=15m \
+#        -e TZ=Etc/UTC \
+#        -e ADMIN_USER=mrrobot \
+#        -e ADMIN_PASSWORD=supercomplicatedpassword \
+#        -e DOMAIN=cloud.example.com \
+#        -e DB_TYPE=mysql \
+#        -e DB_NAME=nextcloud \
+#        -e DB_USER=nextcloud \
+#        -e DB_PASSWORD=supersecretpassword \
+#        -e DB_HOST=db_nextcloud \
+#        wonderfall/nextcloud:10.0

@@ -1,0 +1,34 @@
+version: '2'
+services:
+  registry:
+    image: '172.26.35.81:4000/registry:v2'
+    container_name: 'registry'
+    volumes:
+    - /data/docker:/var/lib/registry/docker
+    # Mount the config directory  
+    #- ./registry/config:/etc/docker/registry:ro  
+    # Make the registry storage persistent (see ./config/config.yml for the path)  
+    #- ./registry/storage:/var/lib/registry:rw  
+    # Mount our own certificate and key  
+    #- ./registry/certs:/certs:ro  
+    ports:
+    - '4000:5000'
+    restart: always
+
+  frontend:
+    image: '172.26.35.81:4000/konradkleine/docker-registry-frontend:v2'
+    #build: ../  
+    links:
+    - registry:registry
+    ports:
+    # Publish the frontend's port 443 on the IP 0.0.0.0 on port 8443  
+    - "4001:80"
+    #volumes:  
+    #- ./frontend.crt:/etc/apache2/server.crt:ro  
+    #- ./frontend.key:/etc/apache2/server.key:ro  
+    environment:
+    # The front-end is SSL protected  
+    #- ENV_USE_SSL=yes  
+    - ENV_DOCKER_REGISTRY_HOST=172.26.35.81
+    - ENV_DOCKER_REGISTRY_PORT=4000
+

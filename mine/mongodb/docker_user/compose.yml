@@ -1,0 +1,16 @@
+version: '2'
+services:
+  work_flow:
+    image: '172.26.35.81:4000/anaconda:v3_3'
+    container_name: anaconda
+    hostname: work_flow
+    # 宿主机和容器内端口的映射关系，5000是容器内运行的flask前端用的端口
+    ports:
+    - '8091:5000'
+    # 从宿主机挂载到容器内部的目录，可以起到宿主机的内容改变容器内部即刻改变的目的
+    # 现在挂载进去的有../../ 此项目的根目录，和容器的启动脚本
+    volumes:
+    - '../../:/code/project/'
+    - './entry.sh:/code/share/entry.sh'
+    entrypoint: /bin/sh /code/share/entry.sh
+    restart: always

@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db_nextcloud:
+    image: '172.26.35.81:4000/mariadb'
+    container_name: db_nextcloud
+    ports:
+      - "8089:3306"
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+

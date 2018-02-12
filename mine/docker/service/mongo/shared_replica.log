@@ -1,0 +1,16 @@
+mongo_cfs:docker -H 172.26.35.133:4243 run -d -p 27032:27017 --name cfdb2 -v /data/dock/docker_test/mongodb/test/cfdata2:/data/db -v /data/dock/docker_test/mongodb/test/log2:/data/mongo/ 172.26.35.81:4000/mongo --configsvr --replSet cs --port 27017 --logpath /data/mongo/log.log
+mongo_config server ip_port ---cs---172.26.35.133:27032
+mongo_cfs:docker -H 172.26.35.133:4243 run -d -p 27033:27017 --name cfdb3 -v /data/dock/docker_test/mongodb/test/cfdata3:/data/db -v /data/dock/docker_test/mongodb/test/log3:/data/mongo/ 172.26.35.81:4000/mongo --configsvr --replSet cs --port 27017 --logpath /data/mongo/log.log
+mongo_config server ip_port ---cs---172.26.35.133:27033
+mongo_cfs:docker -H 172.26.35.133:4243 run -d -p 27031:27017 --name cfdb1 -v /data/dock/docker_test/mongodb/test/cfdata1:/data/db -v /data/dock/docker_test/mongodb/test/log1:/data/mongo/ 172.26.35.81:4000/mongo --configsvr --replSet cs --port 27017 --logpath /data/mongo/log.log
+mongo_config server ip_port ---cs---172.26.35.133:27031
+mongo_os:docker -H 172.26.35.133:4243 run -d -p 27041:27017 --name cfdb1 -v /data/dock/docker_test/mongodb/test/osdata1:/data/db -v /data/dock/docker_test/mongodb/test/oslog1:/data/mongos/ 172.26.35.81:4000/mongo mongos --configdb cs/172.26.35.133:27031,172.26.35.133:27032,172.26.35.133:27033 --port 27017 --logpath /data/mongos/log.log
+mongo_router server ip_port --- ---172.26.35.133:27041
+mongo_os:docker -H 172.26.35.133:4243 run -d -p 27041:27017 --name cfdb1 -v /data/dock/docker_test/mongodb/test/osdata1:/data/db -v /data/dock/docker_test/mongodb/test/oslog1:/data/mongos/ 172.26.35.81:4000/mongo mongos --configdb cs/172.26.35.133:27031,172.26.35.133:27032,172.26.35.133:27033 --port 27017 --logpath /data/mongos/log.log
+mongo_router server ip_port --- ---172.26.35.133:27041
+mongo_os:docker -H 172.26.35.133:4243 run -d -p 27041:27017 --name os1 -v /data/dock/docker_test/mongodb/test/osdata1:/data/db -v /data/dock/docker_test/mongodb/test/oslog1:/data/mongos/ 172.26.35.81:4000/mongo mongos --configdb cs/172.26.35.133:27031,172.26.35.133:27032,172.26.35.133:27033 --port 27017 --logpath /data/mongos/log.log
+mongo_router server ip_port --- ---172.26.35.133:27041
+mongo_os:docker -H 172.26.35.133:4243 run -d -p 27042:27017 --name os2 -v /data/dock/docker_test/mongodb/test/osdata2:/data/db -v /data/dock/docker_test/mongodb/test/oslog2:/data/mongos/ 172.26.35.81:4000/mongo mongos --configdb cs/172.26.35.133:27031,172.26.35.133:27032,172.26.35.133:27033 --port 27017 --logpath /data/mongos/log.log
+mongo_router server ip_port --- ---172.26.35.133:27042
+mongo_shd:docker -H 172.26.35.133:4243 run -d -p 27051:27017 --name shd1 -v /data/dock/docker_test/mongodb/test/shddata1:/data/db -v /data/dock/docker_test/mongodb/test/shdlog1:/data/mongoshd/ 172.26.35.81:4000/mongo --shardsvr --replSet shd1 --port 27017 --logpath /data/mongoshd/log.log
+mongo_shared server ip_port ---172.26.35.133---shd1:27051

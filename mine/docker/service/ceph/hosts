@@ -1,0 +1,34 @@
+[test]
+172.26.35.226 ansible_ssh_user=jenkins
+[226]
+172.26.35.226 ansible_ssh_user=jenkins
+[225]
+172.26.35.225 ansible_ssh_user=jenkins
+[226]
+172.26.35.226 ansible_ssh_user=jenkins
+[go]
+172.26.35.216 ansible_ssh_user=jenkins
+172.26.35.217 ansible_ssh_user=jenkins
+172.26.35.225 ansible_ssh_user=jenkins
+172.26.35.224 ansible_ssh_user=jenkins
+172.26.35.218 ansible_ssh_user=jenkins
+[218]
+172.26.35.218 ansible_ssh_user=jenkins
+[216]
+172.26.35.216 ansible_ssh_user=jenkins
+[217]
+172.26.35.217 ansible_ssh_user=jenkins
+[224]
+172.26.35.224 ansible_ssh_user=jenkins
+[230]
+172.26.35.230 ansible_ssh_user=jenkins
+[4]
+172.26.35.4 ansible_ssh_user=jenkins
+[47]
+172.26.35.47 ansible_ssh_user=jenkins
+#172.26.35.4 ansible_ssh_user=xjxie ansible_ssh_user_password=Aa123456
+[12]
+172.26.35.12 ansible_ssh_user=root ansible_ssh_user_password=Geforce!@3
+[204]
+172.26.35.204 ansible_ssh_user=jenkins
+

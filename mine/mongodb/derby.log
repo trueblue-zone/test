@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Nov 22 15:51:09 CST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015f-e2b5-8c2d-000010325298 
+on database directory /home/thli/workspace/work_flow/script/mongodb/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@34034c0e 
+Loaded from file:/usr/local/lib/python2.7/dist-packages/pyspark/jars/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-8u91-b14-0ubuntu4~12.04-b14
+user.dir=/home/thli/workspace/work_flow/script/mongodb
+os.name=Linux
+os.arch=amd64
+os.version=3.13.0-95-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

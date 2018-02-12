@@ -1,0 +1,16 @@
+fsid = e5adbca4-fae3-48ef-afc6-1cddac10ae5f
+mon initial members = mon
+mon host = 172.26.35.217
+auth cluster required = cephx
+auth service required = cephx
+auth client required = cephx
+osd journal size = 1024
+filestore xattr use omap = true
+osd pool default size = 2
+osd pool default min size = 1
+osd pool default pg num = 333
+osd pool default pgp num = 333
+osd crush chooseleaf type = 1
+osd_disk_thread_ioprio_class = idle
+osd_disk_thread_ioprio_priority = 0
+

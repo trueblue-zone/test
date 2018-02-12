@@ -1,0 +1,21 @@
+version: '2'
+services:
+  nextcloud:
+    image: '172.26.35.81:4000/wonderfall/nextcloud'
+    container_name: nextcloud
+    ports:
+      - "8087:8888"
+    volumes:
+      - ./data/data:/data
+      - ./data/config:/config
+      - ./data/apps:/apps2
+      - ./data/themes:/nextcloud/themes
+    environment:
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=nextcloudindocker
+      - DOMAIN=172.26.35.47:8087
+      - DB_TYPE=mysql
+      - DB_NAME=nextcloud
+      - DB_USER=nextcloud
+      - DB_PASSWORD=nextcloud
+      - DB_HOST=db_nextcloud

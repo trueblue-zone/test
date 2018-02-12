@@ -1,0 +1,27 @@
+使用说明： 需要安装有docker和docker-compose
+1 这个docker_user是为使用docker来运行workflow项目而增添的目录，和本身的workflow项目的
+业务逻辑无关
+2 当用git pull完workflow的项目文件后，只需要来docker_user这个目录运行
+docker-compose -f compose.yml up -d (来启动)就可以了，然后就可以在浏览器打开
+localhost:8091 看见在容器内运行的项目的首页了
+3 当需要开发或是测试，改动代码时，只需要改动项目根目录下所属项目相关代码文件，再刷新网页即可，
+和你在宿主机上编写代码一样
+4 当要重启项目前端manager时，需要进入docker容器（docker exec -it anaconda /bin/bash，
+看见命令行前面的机器名变成work_flow，即证明已经进入容器了，使用bash交互），
+然后进行相关命令操作（和在宿主机上一样的操作，比如service ×× restart ， kill -9 234， python
+manager.py等等 ）
+5 第一次使用docker命令的用户需要熟悉大概的docker命令使用，用户得有docker命令权限，
+docker-compose命令也需要权限docker操作权限 可以用sudo passwd -a username docker，来增加用户username的docker操作权限
+
+
+延伸：
+1 项目代码是放在宿主机器上，通过挂载的方式放入容器的，这样就可以让容器内外的代码实时一致，而代码
+可以通过在宿主机器上通过pycharm这样的编辑器修改代码，而容器里面运行代码；但是也就产生一个问题，
+不能通过pycharm进行单步调试，因为pycharm单步运行用的是宿主机器的环境，或许可以让pycharm运行的是
+docker容器内部的环境，这是笔者先麻烦暂时没研究过，能行的一个拌饭就是让pycharm在docker容器内部运行，
+这个方法可以自行百度
+2 使用docker来运行这个项目的最大好处是，宿主机器上不需要安装和项目运行相关的一切环境，环境都是
+在容器内部安装好了的，唯一需要安装的是个docker运行环境和docker-compose命令，
+这对开发和测试都是个很好的用处，即使是后期部署维护也是个很大的优势
+3 现在容器内环境有的python包只是我们暂时知道的，而且用的是强大的anaconda这样的包管理工具，后续会根据需要来增加，
+如果自己需要临时使用可以，使用apt，conda命令或是pip安装试试，conda命令需要连接外网
